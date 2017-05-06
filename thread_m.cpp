@@ -9,7 +9,7 @@ using namespace std;
 
 void func()
 {
-  std::cout << "This is func" << '\n';
+  std::cout << "This is func " << '\n';
 }
 
 
