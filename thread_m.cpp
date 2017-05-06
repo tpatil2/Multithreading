@@ -14,9 +14,9 @@ void func()
 
 class Factor{
 public:
-  void operator()(){
-    for(int i=100;i>1;i--)
-      std::cout << "In functor i "<< i << '\n';
+  void operator()(string& msg){
+    std::cout << "Inside join : "<< msg << '\n';
+    msg="changed";
   }
 
 };
@@ -24,16 +24,13 @@ public:
 
 int main()
 {
-  Factor f1;
-  std::thread t1 (f1);     // created a thread
+  string s = "This is multi-threading";
 
-    for(int i=0;i<100;i++)
-      std::cout << "from main i = " << i << '\n';
-
+  std::thread t1 ((Factor()),std::ref(s));     // created a thread
+      std::cout << "Before Join : "<< s << '\n';
       t1.join(); // join thread
-
-
-  std::cout << "At the end of Main" << '\n';
+      std::cout << "After Join : "<< s << '\n';
+      std::cout << "At the end of Main" << '\n';
 
 
   return 0;
