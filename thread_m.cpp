@@ -12,21 +12,29 @@ void func()
   std::cout << "This is func " << '\n';
 }
 
+class Factor{
+public:
+  void operator()(){
+    for(int i=100;i>1;i--)
+      std::cout << "In functor i "<< i << '\n';
+  }
+
+};
+
 
 int main()
 {
-  std::thread t1 (func);     // created a thread
+  Factor f1;
+  std::thread t1 (f1);     // created a thread
 
-  try{
     for(int i=0;i<100;i++)
       std::cout << "from main i = " << i << '\n';
-  }catch(...){
-    t1.join(); // join thread
-    std::cout << "/* message */" << '\n';
-    throw;
-  }
+
+      t1.join(); // join thread
+
 
   std::cout << "At the end of Main" << '\n';
+
 
   return 0;
 
